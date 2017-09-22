@@ -7,25 +7,12 @@ public class Main {
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please input the numbers you would like to add");
-        System.out.println("Input done when you are finished");
 
-        ArrayList<Integer> toAdd = new ArrayList<Integer>();
-        while (true){
-            String input = scanner.nextLine();
-            if (input.equals("done")){
-                break;
-            }
-           Integer intInput = Integer.parseInt(input);
-            toAdd.add(intInput);
-        }
 
-        Integer[] setNums = new Integer[toAdd.size()];
-        for (int i = 0; i < toAdd.size(); i++){
-            setNums[i] = toAdd.get(i);
-        }
 
-        Set mySet = new Set(setNums);
+
+
+        Set mySet = new Set(1, 2, 3, 3, 4, 5, 6, 7, 7, 8, 3, 9, 10);
 
         System.out.println("Inputs:");
         System.out.println("add - prompts user for an integer to add");
@@ -38,13 +25,10 @@ public class Main {
             String input = scanner.nextLine();
             if (input.equals("add")){
                 System.out.println("Input an integer to add");
-                Integer intInput = scanner.nextInt();
-                mySet.add(intInput);
-
+                mySet.add();
             } else if (input.equals("remove")){
                 System.out.println("Input an integer to remove");
-                Integer intInput = scanner.nextInt();
-                mySet.remove(intInput);
+                mySet.remove();
             } else if (input.equals("values")){
                 mySet.values();
             } else if (input.equals("size")){

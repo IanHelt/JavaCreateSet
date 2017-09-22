@@ -1,45 +1,38 @@
 package io.ian;
 
-public class Set {
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Set {
+    Scanner scanner = new Scanner(System.in);
     private Integer[] setData;
 
    public Set(Integer... numbers) {
+       ArrayList<Integer> duplicates = new ArrayList<Integer>();
+       ArrayList<Integer> toSet = new ArrayList<Integer>();
+       for (int i = 0; i < numbers.length; i++) {
+           boolean isDuplicate = false;
+           for (int j = i + 1; j < numbers.length; j++) {
+               if (numbers[i] == numbers[j]){
+                   isDuplicate = true;
+               }
+           }
+           if (isDuplicate){
+               duplicates.add(numbers[i]);
+           } else {
+               toSet.add(numbers[i]);
+           }
+       }
+       System.out.println("Duplicates found: " + duplicates.toString());
+       this.setData = toSet.toArray(new Integer[toSet.size()]);
+   }
 
-        int indexCounter = 0;
-        Integer[] data = new Integer[numbers.length];
 
-        for (int i = 0; i < numbers.length; i++) {
-            boolean nullCheck = false;
-            for (int h = i + 1; h < (numbers.length - i); h++) {
-                if (numbers[i] == numbers[h]){
-                    data[i] = null;
-                    break;
-                } else {
-                    nullCheck = true;
-                }
-            }
-            if (nullCheck == true){
-                data[i] = numbers[i];
-                indexCounter++;
-            }
-        }
 
-       Integer[] newData = new Integer[indexCounter];
 
-       int adjustIncrement = 0;
-       for (int i = 0; i < data.length; i++){
-
-            if (data[i] == null){
-                adjustIncrement++;
-            } else {
-                newData[(i - adjustIncrement)] = data[i];
-            }
-        }
-        this.setData = newData;
-    }
-
-    public void add(Integer number){
+    public void add(){
+        Integer number = scanner.nextInt();
         Boolean isDuplicate = false;
         for (int i = 0; i < this.setData.length; i++) {
             if (number == this.setData[i]){
@@ -47,29 +40,32 @@ public class Set {
                 break;
             }
         }
-        if (isDuplicate == true){
+        if (isDuplicate){
             System.out.println("Error: Duplicate entry");
         } else {
-            Integer[] data = new Integer[this.setData.length + 1];
-
+            Integer[] data = new Integer[(this.setData.length + 1)];
             for (int i = 0; i < this.setData.length; i++) {
                 data[i] = this.setData[i];
             }
-            data[this.setData.length + 1] = number;
+            data[data.length - 1] = number;
+            System.out.println("Successfully added " + number);
             this.setData = data;
         }
     }
 
-    public void remove(Integer number){
+    public void remove(){
+        Integer number = scanner.nextInt();
         Integer[] data = new Integer[this.setData.length - 1];
         Boolean adjustIncrement = false;
-
+        System.out.println("Another message will display after this message if " + number + " is found and removed");
         for (int i = 0; i < this.setData.length; i++) {
 
             if (number == this.setData[i]){
+                System.out.println(number + " Successfully removed");
                adjustIncrement = true;
-            } else if (adjustIncrement == true) {
+            } else if (adjustIncrement) {
                 data[(i - 1)] = this.setData[i];
+
             }else{
                 data[i] = this.setData[i];
             }
